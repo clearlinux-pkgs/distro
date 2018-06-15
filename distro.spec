@@ -4,7 +4,7 @@
 #
 Name     : distro
 Version  : 1.3.0
-Release  : 1
+Release  : 2
 URL      : https://github.com/nir0s/distro/archive/v1.3.0.tar.gz
 Source0  : https://github.com/nir0s/distro/archive/v1.3.0.tar.gz
 Summary  : No detailed summary available
