@@ -4,7 +4,7 @@
 #
 Name     : distro
 Version  : 1.3.0
-Release  : 7
+Release  : 8
 URL      : https://github.com/nir0s/distro/archive/v1.3.0.tar.gz
 Source0  : https://github.com/nir0s/distro/archive/v1.3.0.tar.gz
 Summary  : No detailed summary available
@@ -12,17 +12,15 @@ Group    : Development/Tools
 License  : Apache-2.0
 Requires: distro-bin
 Requires: distro-python3
+Requires: distro-license
 Requires: distro-python
-BuildRequires : pbr
-BuildRequires : pip
+BuildRequires : buildreq-distutils3
 BuildRequires : pluggy
 BuildRequires : py-python
 BuildRequires : pytest
-
-BuildRequires : python3-dev
-BuildRequires : setuptools
 BuildRequires : tox
 BuildRequires : virtualenv
+Patch1: os-release.patch
 
 %description
 Distro - an OS platform information API
@@ -32,9 +30,18 @@ See `Official GitHub repo <https://github.com/nir0s/distro#distro---a-linux-os-p
 %package bin
 Summary: bin components for the distro package.
 Group: Binaries
+Requires: distro-license
 
 %description bin
 bin components for the distro package.
+
+
+%package license
+Summary: license components for the distro package.
+Group: Default
+
+%description license
+license components for the distro package.
 
 
 %package python
@@ -57,17 +64,20 @@ python3 components for the distro package.
 
 %prep
 %setup -q -n distro-1.3.0
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1526501458
+export SOURCE_DATE_EPOCH=1534208467
 python3 setup.py build -b py3
 
 %install
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/doc/distro
+cp LICENSE %{buildroot}/usr/share/doc/distro/LICENSE
 python3 -tt setup.py build -b py3 install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -79,6 +89,10 @@ echo ----[ mark ]----
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/distro
+
+%files license
+%defattr(-,root,root,-)
+/usr/share/doc/distro/LICENSE
 
 %files python
 %defattr(-,root,root,-)
