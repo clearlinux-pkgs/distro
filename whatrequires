@@ -1,2 +1,10 @@
 # This file contains recursive sources that require this package
+WALinuxAgent
+certbot
 compute-image-packages
+diffoscope
+home-assistant
+mock
+rospkg
+salt
+vpp

@@ -4,10 +4,10 @@
 #
 Name     : distro
 Version  : 1.4.0
-Release  : 15
+Release  : 16
 URL      : https://github.com/nir0s/distro/archive/v1.4.0.tar.gz
 Source0  : https://github.com/nir0s/distro/archive/v1.4.0.tar.gz
-Summary  : No detailed summary available
+Summary  : Drop-in replacment for the python-distro utility, written in Go
 Group    : Development/Tools
 License  : Apache-2.0
 Requires: distro-bin = %{version}-%{release}
@@ -66,6 +66,7 @@ python components for the distro package.
 Summary: python3 components for the distro package.
 Group: Default
 Requires: python3-core
+Provides: pypi(distro)
 
 %description python3
 python3 components for the distro package.
@@ -73,14 +74,21 @@ python3 components for the distro package.
 
 %prep
 %setup -q -n distro-1.4.0
+cd %{_builddir}/distro-1.4.0
 %patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1550191835
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1582917341
+# -Werror is for werrorists
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
@@ -88,7 +96,7 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/distro
-cp LICENSE %{buildroot}/usr/share/package-licenses/distro/LICENSE
+cp %{_builddir}/distro-1.4.0/LICENSE %{buildroot}/usr/share/package-licenses/distro/c700a8b9312d24bdc57570f7d6a131cf63d89016
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -103,7 +111,7 @@ echo ----[ mark ]----
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/distro/LICENSE
+/usr/share/package-licenses/distro/c700a8b9312d24bdc57570f7d6a131cf63d89016
 
 %files python
 %defattr(-,root,root,-)
