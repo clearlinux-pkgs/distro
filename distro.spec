@@ -4,7 +4,7 @@
 #
 Name     : distro
 Version  : 1.5.0
-Release  : 22
+Release  : 23
 URL      : https://github.com/nir0s/distro/archive/v1.5.0/distro-1.5.0.tar.gz
 Source0  : https://github.com/nir0s/distro/archive/v1.5.0/distro-1.5.0.tar.gz
 Summary  : Distro - an OS platform information API
