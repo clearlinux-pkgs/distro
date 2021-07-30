@@ -2,9 +2,11 @@
 WALinuxAgent
 certbot
 compute-image-packages
+cve-bin-tool
 diffoscope
+docker-compose
 home-assistant
 mock
-rospkg
+pcs
 salt
 vpp
