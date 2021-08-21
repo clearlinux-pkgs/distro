@@ -1,0 +1,29 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Patrick McCarty <patrick.mccarty@intel.com>
+Date: Fri, 20 Aug 2021 17:27:10 -0700
+Subject: [PATCH] Check for empty /etc/os-release
+
+In the mock build environment, /etc/os-release is an empty file, which
+leads the distro package to populate no distribution data.
+
+Signed-off-by: Patrick McCarty <patrick.mccarty@intel.com>
+---
+ distro.py | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/distro.py b/distro.py
+index 7892741..7158d1e 100755
+--- a/distro.py
++++ b/distro.py
+@@ -746,7 +746,10 @@ class LinuxDistribution(object):
+ 
+             # NOTE: The idea is to respect order **and** have it set
+             #       at all times for API backwards compatibility.
+-            if os.path.isfile(etc_dir_os_release_file) or not os.path.isfile(
++            # NOTE: For Clear Linux builds, mock creates an empty
++            #       /etc/os-release in the build environment,
++            #       so check for that case.
++            if os.path.isfile(etc_dir_os_release_file) and os.stat(etc_dir_os_release_file).st_size != 0 or not os.path.isfile(
+                 usr_lib_os_release_file
+             ):
+                 self.os_release_file = etc_dir_os_release_file
