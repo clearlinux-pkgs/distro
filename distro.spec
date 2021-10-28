@@ -4,7 +4,7 @@
 #
 Name     : distro
 Version  : 1.6.0
-Release  : 28
+Release  : 29
 URL      : https://github.com/python-distro/distro/archive/v1.6.0/distro-1.6.0.tar.gz
 Source0  : https://github.com/python-distro/distro/archive/v1.6.0/distro-1.6.0.tar.gz
 Summary  : Distro - an OS platform information API
