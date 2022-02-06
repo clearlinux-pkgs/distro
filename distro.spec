@@ -4,7 +4,7 @@
 #
 Name     : distro
 Version  : 1.6.0
-Release  : 33
+Release  : 34
 URL      : https://github.com/python-distro/distro/archive/v1.6.0/distro-1.6.0.tar.gz
 Source0  : https://github.com/python-distro/distro/archive/v1.6.0/distro-1.6.0.tar.gz
 Summary  : Distro - an OS platform information API
@@ -15,11 +15,11 @@ Requires: distro-license = %{version}-%{release}
 Requires: distro-python = %{version}-%{release}
 Requires: distro-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
-BuildRequires : pluggy
-BuildRequires : py-python
-BuildRequires : pytest
-BuildRequires : tox
-BuildRequires : virtualenv
+BuildRequires : pypi(py)
+BuildRequires : pypi-pluggy
+BuildRequires : pypi-pytest
+BuildRequires : pypi-tox
+BuildRequires : pypi-virtualenv
 Patch1: 0001-Check-for-empty-etc-os-release.patch
 
 %description
@@ -79,7 +79,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1635723637
+export SOURCE_DATE_EPOCH=1644186519
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
