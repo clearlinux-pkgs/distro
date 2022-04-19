@@ -8,14 +8,14 @@ leads the distro package to populate no distribution data.
 
 Signed-off-by: Patrick McCarty <patrick.mccarty@intel.com>
 ---
- distro.py | 5 ++++-
+ src/distro/distro.py | 5 ++++-
  1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/distro.py b/distro.py
-index 7892741..7158d1e 100755
---- a/distro.py
-+++ b/distro.py
-@@ -746,7 +746,10 @@ class LinuxDistribution(object):
+diff --git a/src/distro/distro.py b/src/distro/distro.py
+index 49066ae..7b49822 100755
+--- a/src/distro/distro.py
++++ b/src/distro/distro.py
+@@ -746,7 +746,10 @@ class LinuxDistribution:
  
              # NOTE: The idea is to respect order **and** have it set
              #       at all times for API backwards compatibility.
